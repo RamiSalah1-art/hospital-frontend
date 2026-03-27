@@ -27,13 +27,8 @@ services:
     environment:
       DATABASE_URL: postgresql://app_user:app_pass@postgres:5432/freelance_monitor
       REDIS_URL: redis://redis:6379
-
-  frontend:
-    build: ./frontend
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
+    volumes:
+      - ./backend:/app
 
 volumes:
   postgres_data:
