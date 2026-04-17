@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import type { Invoice, InvoiceItem, Patient } from '../types/index';
 import { useAuth } from '../hooks/useAuth';
