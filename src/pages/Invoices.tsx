@@ -5,7 +5,6 @@ import type { Invoice, InvoiceItem, Patient } from '../types/index';
 import { useAuth } from '../hooks/useAuth';
 
 export default function InvoicesPage() {
-  const navigate = useNavigate();
   const { user } = useAuth();
   const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -55,14 +54,16 @@ export default function InvoicesPage() {
     setItems(items.filter((_, i) => i !== index));
   };
 
-  const updateItem = (index: number, field: keyof InvoiceItem, value: string | number) => {
-    const updated = [...items];
-    updated[index][field] = value as any;
-    if (field === 'quantity' || field === 'unitPrice') {
-      updated[index].total = updated[index].quantity * updated[index].unitPrice;
-    }
-    setItems(updated);
-  };
+const updateItem = (index: number, field: keyof InvoiceItem, value: string | number) => {
+  const updated = [...items];
+  if (field === 'quantity' || field === 'unitPrice') {
+    updated[index][field] = Number(value);
+    updated[index].total = updated[index].quantity * updated[index].unitPrice;
+  } else if (field === 'description') {
+    updated[index][field] = value as string;
+  }
+  setItems(updated);
+};
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
