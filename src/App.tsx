@@ -8,6 +8,7 @@ import Appointments from './pages/Appointments';
 import MedicalRecordPage from './pages/MedicalRecord';
 import PrescriptionsPage from './pages/Prescriptions';
 import InvoicesPage from './pages/Invoices';
+import Settings from './pages/Settings';
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -29,6 +30,7 @@ function App() {
         <Route path="/doctors" element={<PrivateRoute><Doctors /></PrivateRoute>} />
         <Route path="/appointments" element={<PrivateRoute><Appointments /></PrivateRoute>} />
         <Route path="/invoices" element={<PrivateRoute><InvoicesPage /></PrivateRoute>} />
+        <Route path="/settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
         <Route path="/patients/:patientId/medical-record" element={<PrivateRoute><MedicalRecordPage /></PrivateRoute>} />
         <Route path="/patients/:patientId/prescriptions" element={<PrivateRoute><PrescriptionsPage /></PrivateRoute>} />
         <Route path="/" element={<Navigate to="/dashboard" />} />

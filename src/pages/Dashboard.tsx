@@ -30,7 +30,6 @@ export default function Dashboard() {
       const doctors = doctorsRes.data;
       const appointments = appointmentsRes.data;
 
-      // مواعيد اليوم
       const today = new Date().toISOString().split('T')[0];
       const todayAppointments = appointments.filter(
         (app: Appointment) => app.date.startsWith(today)
@@ -42,7 +41,6 @@ export default function Dashboard() {
         todayAppointments: todayAppointments.length,
       });
 
-      // آخر 5 مواعيد
       setRecentAppointments(appointments.slice(0, 5));
     } catch (error) {
       console.error('Failed to fetch dashboard data');
@@ -97,17 +95,24 @@ export default function Dashboard() {
       count: stats.todayAppointments,
       countLabel: 'اليوم',
     },
-
-{
-  title: 'الفواتير',
-  description: 'إدارة الفواتير والمدفوعات',
-  icon: '🧾',
-  link: '/invoices',
-  color: 'from-yellow-500 to-yellow-600',
-  count: 0,
-  countLabel: 'إجمالي',
-},
-
+    {
+      title: 'الفواتير',
+      description: 'إدارة الفواتير والمدفوعات',
+      icon: '🧾',
+      link: '/invoices',
+      color: 'from-yellow-500 to-yellow-600',
+      count: 0,
+      countLabel: 'إجمالي',
+    },
+    {
+      title: 'الإعدادات',
+      description: 'تخصيص إعدادات النظام',
+      icon: '⚙️',
+      link: '/settings',
+      color: 'from-gray-500 to-gray-600',
+      count: 0,
+      countLabel: '',
+    },
   ];
 
   return (
